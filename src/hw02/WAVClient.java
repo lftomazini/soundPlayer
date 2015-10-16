@@ -7,12 +7,13 @@ package hw02;
 
 import java.io.IOException;
 import java.util.Scanner;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
  * @author lffct001
  */
-public class WAVClient extends WAVAudioFile {
+public class WAVClient extends Waveforms {
 
     /**
      *
@@ -38,7 +39,7 @@ public class WAVClient extends WAVAudioFile {
      * Gives options to choose or generate an audio file
      *
      */
-    public void menu() {
+    public void menu() throws UnsupportedAudioFileException {
 
         do {
 
@@ -77,7 +78,7 @@ public class WAVClient extends WAVAudioFile {
     /**
      * Gives options to process the chosen or generated audio file
      */
-    public void actions() {
+    public void actions() throws UnsupportedAudioFileException {
 
         try {
             do {
@@ -154,7 +155,7 @@ public class WAVClient extends WAVAudioFile {
     /**
      * Gives options to choose the wave form to the audio file to be generated
      */
-    public void chooseWaveForm() {
+    public void chooseWaveForm() throws UnsupportedAudioFileException {
         do {
             this.clearScreen();
             System.out.println("Choose an option:");
@@ -205,7 +206,7 @@ public class WAVClient extends WAVAudioFile {
         } while (option != 0);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedAudioFileException {
         try {
             WAVClient menu = new WAVClient();
             menu.menu();
