@@ -26,8 +26,8 @@ public class Complex {
     
     /**
      *
-     * @param real component of the number
-     * @param imgaginary component of the number
+     * @param real - real component of the number
+     * @param img - imaginary component of the number
      */
     public Complex(float real, float img) {
         this.real = real;
