@@ -25,6 +25,9 @@ public class WAVClient extends WAVAudioFile {
     private int option;
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     *
+     */
     public void clearScreen() {
         for (int clear = 0; clear < 10; clear++) {
             System.out.println("\b");
