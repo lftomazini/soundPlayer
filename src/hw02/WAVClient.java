@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author lffct001
  */
-public class WAVClient extends WAVAudioFile {
+public class WAVClient extends Waveforms {
 
     /**
      *

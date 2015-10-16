@@ -16,6 +16,7 @@
  */
 package hw02;
 
+import java.awt.Component;
 import java.awt.HeadlessException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -33,6 +34,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JFileChooser;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -76,9 +78,9 @@ public class WAVAudioFile {
     private Path path;
     private byte[] bytes;
     private AudioFileFormat aFFormat;
-    private AudioFormat aFormat;
+    AudioFormat aFormat;
     private double duration;
-    private AudioInputStream aIS;
+    AudioInputStream aIS;
 
     /**
      * Class Constructor
@@ -92,10 +94,22 @@ public class WAVAudioFile {
      * Chooses a file from the computer chosen by the user
      */
     public void chooseFile() {
+//        try {
+//            Scanner scanner = new Scanner(System.in);
+//            System.out.println("Type the file location");
+//            this.s_path = scanner.next();
+//            this.path = Paths.get(s_path);
+//            this.bytes = this.WAVtoByte();
+//        } catch (HeadlessException e) {
+//            System.out.println("Headless exception occurred here");
+//        }
+
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Type the file location");
-            this.s_path = scanner.next();
+            JFileChooser chooser = new JFileChooser();
+            Component j = null;
+            chooser.showOpenDialog(j);
+            File file = chooser.getSelectedFile();
+            this.s_path = file.getAbsolutePath();
             this.path = Paths.get(s_path);
             this.bytes = this.WAVtoByte();
         } catch (HeadlessException e) {
@@ -194,200 +208,6 @@ public class WAVAudioFile {
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
-    }
-
-    /**
-     * Asks the user for the duration of the waveform to be generated
-     *
-     * @return the duration of the waveform to be generated
-     */
-    public double getDurationWaveForms() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("What should be the duration of the waveform?");
-        double duration = scanner.nextDouble();
-
-        return duration;
-    }
-
-    /**
-     * Asks the user for the frequency of the waveform to be generated
-     *
-     * @return the frequency of the waveform to be generated
-     */
-    public float getFrequencyWaveForms() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("What should be the frequency of the waveform?");
-        float frequency = scanner.nextFloat();
-
-        return frequency;
-    }
-
-    /**
-     * Asks the user for the frequency of the waveform to be generated
-     *
-     * @return the frequency of the waveform to be generated
-     */
-    public float getAmplitudeWaveForms() {
-        Scanner scanner = new Scanner(System.in);
-        float amplitude;
-        do {
-            System.out.println(
-                    "What should be the amplitude of the waveform?");
-            amplitude = scanner.nextFloat();
-            if (amplitude < 0.0 || amplitude > 1.0) {
-                System.out.println(
-                        "Invalid amplitude! It should be between 0.0 and 1.0");
-            }
-        } while (amplitude < 0.0 || amplitude > 1.0);
-        amplitude *= 10;
-
-        return amplitude;
-    }
-
-    /**
-     * Generates a sine wave sound based on the parameters given
-     *
-     * @param duration
-     * @param frequency
-     * @param amplitude
-     * @see
-     * http://blogs.msdn.com/b/dawate/archive/2009/06/25/intro-to-audio-programming-part-4-algorithms-for-different-sound-waves-in-c.aspx
-     *
-     */
-    public void generateSine(double duration, float frequency,
-                             float amplitude) {
-        try {
-            double twoPiF = 2
-                            * Math.PI
-                            * frequency;
-            byte[] bytes
-                   = new byte[(int) (duration
-                                     * 2 * SAMPLE_RATE)];
-            for (int i = 0; i < bytes.length; i++) {
-                double time = i / SAMPLE_RATE;
-                bytes[i] = (byte) (amplitude
-                                   * Math.sin(twoPiF
-                                              * time));
-
-                InputStream buffer = new ByteArrayInputStream(bytes);
-                this.aFormat = new AudioFormat((float) SAMPLE_RATE,
-                                               NUMBER_OF_BITS,
-                                               CHANNELS,
-                                               SIGNED, IS_BIG_ENDIAN);
-                this.aIS = new AudioInputStream(buffer, this.getAFormat(),
-                                                bytes.length);
-                buffer.close();
-            }
-        } catch (IOException e) {
-            System.out.println("IOException occurred");
-        }
-    }
-
-    /**
-     * Asks the user for the parameters and generates a sine waveform
-     */
-    public void createSine() {
-        double duration = this.getDurationWaveForms();
-        float frequency = this.getFrequencyWaveForms();
-        float amplitude = this.getAmplitudeWaveForms();
-
-        this.generateSine(duration, frequency, amplitude);
-    }
-
-    /**
-     * Generates a square wave sound based on the parameters given
-     *
-     * @param duration
-     * @param frequency
-     * @param amplitude
-     * @see
-     * http://blogs.msdn.com/b/dawate/archive/2009/06/25/intro-to-audio-programming-part-4-algorithms-for-different-sound-waves-in-c.aspx
-     *
-     */
-    public void generateSquare(double duration, float frequency,
-                               float amplitude) {
-        try {
-            double twoPiF = 2
-                            * Math.PI
-                            * frequency;
-            byte[] bytes
-                   = new byte[(int) (duration * 2
-                                     * SAMPLE_RATE)];
-            for (int i = 1; i < bytes.length; i++) {
-                double time = i / SAMPLE_RATE;
-                bytes[i] = (byte) (amplitude * Math.signum(Math.sin(
-                                   i * frequency)));
-
-                InputStream buffer = new ByteArrayInputStream(bytes);
-                this.aFormat = new AudioFormat((float) SAMPLE_RATE,
-                                               NUMBER_OF_BITS,
-                                               CHANNELS,
-                                               SIGNED, IS_BIG_ENDIAN);
-                this.aIS = new AudioInputStream(buffer, this.getAFormat(),
-                                                bytes.length);
-
-                buffer.close();
-            }
-        } catch (IOException e) {
-            System.out.println("IOException occurred");
-        }
-    }
-
-    /**
-     * Asks the user for the parameters and generates a square waveform
-     */
-    public void createSquare() {
-        double duration = this.getDurationWaveForms();
-        float frequency = this.getFrequencyWaveForms();
-        float amplitude = this.getAmplitudeWaveForms();
-
-        this.generateSquare(duration, frequency, amplitude);
-
-    }
-
-    /**
-     * Generates a sawtooth wave sound based on the parameters given
-     *
-     * @param duration
-     * @param frequency
-     * @param amplitude
-     * @see
-     * http://stackoverflow.com/questions/17604968/generate-sawtooth-tone-in-java-android
-     *
-     */
-    public void generateSawTooth(double duration, float frequency,
-                                 float amplitude) {
-        try {
-            byte[] bytes
-                   = new byte[(int) (duration * 2
-                                     * SAMPLE_RATE)];
-            for (int i = 1; i < bytes.length; i++) {
-                bytes[i] = (byte) ((byte) (amplitude * (i % (SAMPLE_RATE / frequency)) / (SAMPLE_RATE / frequency)) - 1);
-
-                InputStream buffer = new ByteArrayInputStream(bytes);
-                this.aFormat = new AudioFormat((float) SAMPLE_RATE,
-                                               NUMBER_OF_BITS,
-                                               CHANNELS,
-                                               SIGNED, IS_BIG_ENDIAN);
-                this.aIS = new AudioInputStream(buffer, this.getAFormat(),
-                                                bytes.length);
-                buffer.close();
-            }
-        } catch (IOException e) {
-            System.out.println("IOException occurred");
-        }
-    }
-
-    /**
-     * Asks the user for the parameters and generates a sawtooth waveform
-     */
-    public void createSawTooth() {
-        double duration = this.getDurationWaveForms();
-        float frequency = this.getFrequencyWaveForms();
-        float amplitude = this.getAmplitudeWaveForms();
-
-        this.generateSquare(duration, frequency, amplitude);
-
     }
 
     /**
@@ -554,13 +374,6 @@ public class WAVAudioFile {
         String name = scanner.next();
         String fullPath = location + "/" + name + ".wav";
         this.copyAudio(fullPath);
-    }
-
-    /**
-     * Performs a DFT to the waveform currently loaded in memory
-     */
-    public void DFT() {
-
     }
 
     /**
