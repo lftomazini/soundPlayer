@@ -78,7 +78,7 @@ public class WAVAudioFile {
     private byte[] bytes;
     private AudioFileFormat aFFormat;
     AudioFormat aFormat;
-    private double duration;
+    double duration;
     AudioInputStream aIS;
 
     /**
@@ -338,7 +338,7 @@ public class WAVAudioFile {
             System.out.println("Frame Rate (Frames per second): " + frame_rate);
             System.out.println("Length of waveform in frames: " + frame_length);
             System.out.println(
-                    "byte order (big-endian or little-endian) :" + endian);
+                    "byte order (big-endian or little-endian):" + endian);
         } catch (UnsupportedAudioFileException e) {
             System.out.println("Invalid audio file path");
         } catch (IOException i) {

@@ -148,6 +148,7 @@ public class Waveforms extends WAVAudioFile {
                                                 bytes.length);
                 buffer.close();
             }
+            this.duration = duration;
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
@@ -198,6 +199,8 @@ public class Waveforms extends WAVAudioFile {
 
                 buffer.close();
             }
+            this.duration = duration;
+
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
@@ -243,6 +246,8 @@ public class Waveforms extends WAVAudioFile {
                                                 bytes.length);
                 buffer.close();
             }
+            this.duration = duration;
+
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
