@@ -50,8 +50,8 @@ public class Waveforms extends WAVAudioFile {
         int n = this.complexNums.length;
         Complex[] output = null;
         for (int i = 0; i < n; i++) {  // For each output element
-            float sumreal = 0;
-            float sumimag = 0;
+            double sumreal = 0;
+            double sumimag = 0;
             for (int j = 0; j < n; j++) {  // For each input element
                 float angle = (float) (2 * Math.PI * j * i / n);
                 sumreal += this.complexNums[j].getReal() * Math.cos(angle) + this.complexNums[j].getImg() * Math.sin(

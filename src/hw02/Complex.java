@@ -16,22 +16,32 @@
  */
 package hw02;
 
+import java.util.Arrays;
+
 /**
  *
  * @author as062
  */
 public class Complex {
-    private float real;
-    private float img;
+    double real;
+    double img;
     
     /**
      *
      * @param real - real component of the number
      * @param img - imaginary component of the number
      */
-    public Complex(float real, float img) {
+    public Complex(double real, double img) {
         this.real = real;
         this.img = img;
+    }
+    
+    public double getReal(){
+        return this.real;
+    }
+    
+    public double getImg(){
+        return this.img;
     }
     
     /**
@@ -87,5 +97,14 @@ public class Complex {
     public String toString(){
         String s = this.real + " + " + this.img + "i";
         return s;
+    }
+    
+    /**
+     * Sorts an array of complex numbers
+     * 
+     * @param c - array of complex numbers 
+     */
+    public void sort(Complex[] c){
+        Arrays.sort(c);
     }
 }
