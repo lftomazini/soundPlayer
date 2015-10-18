@@ -379,13 +379,6 @@ public class WAVAudioFile {
         this.copyAudio(fullPath);
     }
 
-    /**
-     * Performs a DFT to the waveform currently loaded in memory
-     */
-    public void DFT() {
-
-    }
-
     public float askDownsample() throws UnsupportedAudioFileException, IOException {
         Scanner scanner = new Scanner(System.in);
         float newFrequency;
