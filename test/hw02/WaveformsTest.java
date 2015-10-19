@@ -43,20 +43,6 @@ public class WaveformsTest {
     }
 
     /**
-     * Test of DFT method, of class Waveforms.
-     */
-    @Test
-    public void testDFT() {
-        System.out.println("DFT");
-        Waveforms instance = new Waveforms();
-        Complex[] expResult = null;
-        Complex[] result = instance.DFT();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of generateSine method, of class Waveforms.
      */
     @Test
