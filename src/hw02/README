@@ -1,0 +1,1 @@
+We could not fully implement the function of fft. It was trowing an error related to the multiply function in the Complex number class. We tried many approaches to discover which was the error, but we were unable to find it.
