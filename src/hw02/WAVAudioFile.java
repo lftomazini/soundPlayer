@@ -80,6 +80,7 @@ public class WAVAudioFile {
     AudioFormat aFormat;
     double duration;
     AudioInputStream aIS;
+    int numDownSamples;
 
     /**
      * Class Constructor
@@ -99,6 +100,7 @@ public class WAVAudioFile {
 //            this.s_path = scanner.next();
 //            this.path = Paths.get(s_path);
 //            this.bytes = this.WAVtoByte();
+//        this.numDownSamples = 0;
 //        } catch (HeadlessException e) {
 //            System.out.println("Headless exception occurred here");
 //        }
@@ -111,6 +113,7 @@ public class WAVAudioFile {
             this.s_path = file.getAbsolutePath();
             this.path = Paths.get(s_path);
             this.bytes = this.WAVtoByte();
+            this.numDownSamples = 0;
         } catch (Exception e) {
         }
     }
@@ -125,6 +128,7 @@ public class WAVAudioFile {
             this.s_path = s_path;
             this.path = Paths.get(s_path);
             this.bytes = this.WAVtoByte();
+            this.numDownSamples = 0;
         } catch (Exception e) {
             System.out.println("Exception occurred here");
         }
@@ -184,6 +188,13 @@ public class WAVAudioFile {
      */
     public AudioFileFormat getaFormat() {
         return this.aFFormat;
+    }
+
+    /**
+     *
+     */
+    public int getNumDownSamples() {
+        return this.numDownSamples;
     }
 
     /**
@@ -457,19 +468,16 @@ public class WAVAudioFile {
     }
 
     public void downsample() throws UnsupportedAudioFileException, IOException {
-        float frequency = this.askDownsample();
-        createDownsample(frequency);
+        if (this.getNumDownSamples() > 1) {
+            System.out.println(
+                    "Impossible to downsample! You can do it only once.");
+        } else {
+            float frequency = this.askDownsample();
+            createDownsample(frequency);
+        }
     }
 
-    /**
-     * Adjusts the volume of the audio file
-     *
-     * @see
-     * http://stackoverflow.com/questions/953598/audio-volume-control-increase-or-decrease-in-java
-     * @see
-     * http://0110.be/releases/TarsosDSP/TarsosDSP-1.6/TarsosDSP-1.6-Manual.pdf
-     */
-    public void controlVolume() {
+    public void askVolume() {
         int input_1 = 0;
         float input_2 = 0;
         do {
@@ -490,6 +498,18 @@ public class WAVAudioFile {
                 System.out.println("No negative numbers please");
             }
         } while (input_2 < 0 && input_2 > 100);
+        controlVolume(input_1, input_2);
+    }
+
+    /**
+     * Adjusts the volume of the audio file
+     *
+     * @see
+     * http://stackoverflow.com/questions/953598/audio-volume-control-increase-or-decrease-in-java
+     * @see
+     * http://0110.be/releases/TarsosDSP/TarsosDSP-1.6/TarsosDSP-1.6-Manual.pdf
+     */
+    public void controlVolume(int input_1, float input_2) {
 
         for (int i = 0; i < this.getBytes().length; i += 2) {
             // convert byte pair to int

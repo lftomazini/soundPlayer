@@ -115,19 +115,19 @@ public class WAVClient extends Waveforms {
                     case 4:
                         System.out.println(
                                 "You chose (4) Adjust volume of the .wav file");
-                        this.controlVolume();
+                        this.askVolume();
                         this.choose(HOME + "/volume.wav");
                         break;
                     case 5:
                         System.out.println(
                                 "You chose (5) Add delay to .wav file");
-                        this.DFT();
+                        this.askDelay();
                         this.choose(HOME + "/delay.wav");
                         break;
                     case 6:
                         System.out.println(
                                 "You chose (6) Perform DFT to .wav file");
-                        this.save();
+                        this.DFT();
                         break;
                     case 7:
                         System.out.println(

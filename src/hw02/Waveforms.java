@@ -71,7 +71,7 @@ public class Waveforms extends WAVAudioFile {
      *
      * @return the duration of the waveform to be generated
      */
-    public double getDurationWaveForms() {
+    public double askDurationWaveForms() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What should be the duration of the waveform?");
         double duration = scanner.nextDouble();
@@ -84,7 +84,7 @@ public class Waveforms extends WAVAudioFile {
      *
      * @return the frequency of the waveform to be generated
      */
-    public float getFrequencyWaveForms() {
+    public float askFrequencyWaveForms() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What should be the frequency of the waveform?");
         float frequency = scanner.nextFloat();
@@ -97,7 +97,7 @@ public class Waveforms extends WAVAudioFile {
      *
      * @return the frequency of the waveform to be generated
      */
-    public float getAmplitudeWaveForms() {
+    public float askAmplitudeWaveForms() {
         Scanner scanner = new Scanner(System.in);
         float amplitude;
         do {
@@ -158,9 +158,9 @@ public class Waveforms extends WAVAudioFile {
      * Asks the user for the parameters and generates a sine waveform
      */
     public void createSine() {
-        double duration = this.getDurationWaveForms();
-        float frequency = this.getFrequencyWaveForms();
-        float amplitude = this.getAmplitudeWaveForms();
+        double duration = this.askDurationWaveForms();
+        float frequency = this.askFrequencyWaveForms();
+        float amplitude = this.askAmplitudeWaveForms();
 
         this.generateSine(duration, frequency, amplitude);
     }
@@ -210,9 +210,9 @@ public class Waveforms extends WAVAudioFile {
      * Asks the user for the parameters and generates a square waveform
      */
     public void createSquare() {
-        double duration = this.getDurationWaveForms();
-        float frequency = this.getFrequencyWaveForms();
-        float amplitude = this.getAmplitudeWaveForms();
+        double duration = this.askDurationWaveForms();
+        float frequency = this.askFrequencyWaveForms();
+        float amplitude = this.askAmplitudeWaveForms();
 
         this.generateSquare(duration, frequency, amplitude);
 
@@ -257,9 +257,9 @@ public class Waveforms extends WAVAudioFile {
      * Asks the user for the parameters and generates a sawtooth waveform
      */
     public void createSawTooth() {
-        double duration = this.getDurationWaveForms();
-        float frequency = this.getFrequencyWaveForms();
-        float amplitude = this.getAmplitudeWaveForms();
+        double duration = this.askDurationWaveForms();
+        float frequency = this.askFrequencyWaveForms();
+        float amplitude = this.askAmplitudeWaveForms();
 
         this.generateSquare(duration, frequency, amplitude);
 
