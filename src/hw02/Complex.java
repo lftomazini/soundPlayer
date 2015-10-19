@@ -63,7 +63,7 @@ public class Complex {
      * @param c - complex number
      * @return - result
      */
-    public Complex Subtract(Complex c) {
+    public Complex subtract(Complex c) {
         Complex result = new Complex(0,0);
         result.img = this.img - c.img;
         result.real = this.real - c.real;
@@ -78,8 +78,8 @@ public class Complex {
      */
     public Complex multiply(Complex c){
         Complex result = new Complex(0,0);
+        result.img = (this.getReal()*c.getImg()) + (this.getImg()*c.getReal());
         result.real = (this.real*c.real) - (this.img*c.img);
-        result.img = (this.real*c.img) + (this.img*c.real); 
         return result;
     }
     

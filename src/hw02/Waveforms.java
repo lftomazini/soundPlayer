@@ -33,38 +33,38 @@ import javax.sound.sampled.AudioInputStream;
  * @author lffct001
  */
 public class Waveforms extends WAVAudioFile {
-    private Complex[] complexNums;
+    
 
     public Waveforms() throws IOException {
 
     }
 
-    /**
-     * @return @see
-     * http://www.nayuki.io/page/how-to-implement-the-discrete-fourier-transform
-     *
-     * Performs a DFT to the waveform currently loaded in memory
-     *
-     */
-    public Complex[] DFT() {
-        int n = this.complexNums.length;
-        Complex[] output = null;
-        for (int i = 0; i < n; i++) {  // For each output element
-            double sumreal = 0;
-            double sumimag = 0;
-            for (int j = 0; j < n; j++) {  // For each input element
-                float angle = (float) (2 * Math.PI * j * i / n);
-                sumreal += this.complexNums[j].getReal() * Math.cos(angle) + this.complexNums[j].getImg() * Math.sin(
-                        angle);
-                sumimag += -this.complexNums[j].getReal() * Math.sin(angle) + this.complexNums[j].getImg() * Math.cos(
-                        angle);
-            }
-
-            output[i].real = sumreal;
-            output[i].img = sumimag;
-        }
-        return output;
-    }
+//    /**
+//     * @return @see
+//     * http://www.nayuki.io/page/how-to-implement-the-discrete-fourier-transform
+//     *
+//     * Performs a DFT to the waveform currently loaded in memory
+//     *
+//     */
+//    public Complex[] DFT() {
+//        int n = this.complexNums.length;
+//        Complex[] output = null;
+//        for (int i = 0; i < n; i++) {  // For each output element
+//            double sumreal = 0;
+//            double sumimag = 0;
+//            for (int j = 0; j < n; j++) {  // For each input element
+//                float angle = (float) (2 * Math.PI * j * i / n);
+//                sumreal += this.complexNums[j].getReal() * Math.cos(angle) + this.complexNums[j].getImg() * Math.sin(
+//                        angle);
+//                sumimag += -this.complexNums[j].getReal() * Math.sin(angle) + this.complexNums[j].getImg() * Math.cos(
+//                        angle);
+//            }
+//
+//            output[i].real = sumreal;
+//            output[i].img = sumimag;
+//        }
+//        return output;
+//    }
 
     /**
      * Asks the user for the duration of the waveform to be generated
