@@ -16,7 +16,7 @@
  */
 package hw02;
 
-import java.awt.Component;
+import java.awt.HeadlessException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,6 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JFileChooser;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -95,26 +94,26 @@ public class WAVAudioFile {
      * Chooses a file from the computer chosen by the user
      */
     public void chooseFile() {
-//        try {
-//            Scanner scanner = new Scanner(System.in);
-//            System.out.println("Type the file location");
-//            this.s_path = scanner.next();
-//            this.path = Paths.get(s_path);
-//            this.bytes = this.WAVtoByte();
-//        } catch (HeadlessException e) {
-//            System.out.println("Headless exception occurred here");
-//        }
-
         try {
-            JFileChooser chooser = new JFileChooser();
-            Component j = null;
-            chooser.showOpenDialog(j);
-            File file = chooser.getSelectedFile();
-            this.s_path = file.getAbsolutePath();
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Type the file location");
+            this.s_path = scanner.next();
             this.path = Paths.get(s_path);
             this.bytes = this.WAVtoByte();
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
+            System.out.println("Headless exception occurred here");
         }
+
+//        try {
+//            JFileChooser chooser = new JFileChooser();
+//            Component j = null;
+//            chooser.showOpenDialog(j);
+//            File file = chooser.getSelectedFile();
+//            this.s_path = file.getAbsolutePath();
+//            this.path = Paths.get(s_path);
+//            this.bytes = this.WAVtoByte();
+//        } catch (Exception e) {
+//        }
     }
 
     /**
