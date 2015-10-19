@@ -90,7 +90,7 @@ public class WAVClient extends Waveforms {
                 System.out.println("(3) Downsample .wav file");
                 System.out.println("(4) Adjust volume of the .wav file");
                 System.out.println("(5) Add delay to .wav file");
-                System.out.println("(6) Perform DFT to .wav file");
+                System.out.println("(6) Perform FFT to .wav file");
                 System.out.println("(7) Save changes .wav file");
                 System.out.println("(8) Back to previous menu");
 
@@ -126,8 +126,10 @@ public class WAVClient extends Waveforms {
                         break;
                     case 6:
                         System.out.println(
-                                "You chose (6) Perform DFT to .wav file");
-                        this.DFT();
+                                "You chose (6) Perform FFT to .wav file");
+                        Complex[] c = this.byteToComplex();
+                        Complex[] b = this.FFT(c);
+                        this.askPeakAmplitude(b);
                         break;
                     case 7:
                         System.out.println(

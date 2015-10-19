@@ -33,45 +33,45 @@ import javax.sound.sampled.AudioInputStream;
  * @author lffct001
  */
 public class Waveforms extends WAVAudioFile {
-    private Complex[] complexNums;
+    
 
     public Waveforms() throws IOException {
 
     }
 
-    /**
-     * @return @see
-     * http://www.nayuki.io/page/how-to-implement-the-discrete-fourier-transform
-     *
-     * Performs a DFT to the waveform currently loaded in memory
-     *
-     */
-    public Complex[] DFT() {
-        int n = this.complexNums.length;
-        Complex[] output = null;
-        for (int i = 0; i < n; i++) {  // For each output element
-            float sumreal = 0;
-            float sumimag = 0;
-            for (int j = 0; j < n; j++) {  // For each input element
-                float angle = (float) (2 * Math.PI * j * i / n);
-                sumreal += this.complexNums[j].getReal() * Math.cos(angle) + this.complexNums[j].getImg() * Math.sin(
-                        angle);
-                sumimag += -this.complexNums[j].getReal() * Math.sin(angle) + this.complexNums[j].getImg() * Math.cos(
-                        angle);
-            }
-
-            output[i].real = sumreal;
-            output[i].img = sumimag;
-        }
-        return output;
-    }
+//    /**
+//     * @return @see
+//     * http://www.nayuki.io/page/how-to-implement-the-discrete-fourier-transform
+//     *
+//     * Performs a DFT to the waveform currently loaded in memory
+//     *
+//     */
+//    public Complex[] DFT() {
+//        int n = this.complexNums.length;
+//        Complex[] output = null;
+//        for (int i = 0; i < n; i++) {  // For each output element
+//            double sumreal = 0;
+//            double sumimag = 0;
+//            for (int j = 0; j < n; j++) {  // For each input element
+//                float angle = (float) (2 * Math.PI * j * i / n);
+//                sumreal += this.complexNums[j].getReal() * Math.cos(angle) + this.complexNums[j].getImg() * Math.sin(
+//                        angle);
+//                sumimag += -this.complexNums[j].getReal() * Math.sin(angle) + this.complexNums[j].getImg() * Math.cos(
+//                        angle);
+//            }
+//
+//            output[i].real = sumreal;
+//            output[i].img = sumimag;
+//        }
+//        return output;
+//    }
 
     /**
      * Asks the user for the duration of the waveform to be generated
      *
      * @return the duration of the waveform to be generated
      */
-    public double askDurationWaveForms() {
+    public double getDurationWaveForms() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What should be the duration of the waveform?");
         double duration = scanner.nextDouble();
@@ -84,7 +84,7 @@ public class Waveforms extends WAVAudioFile {
      *
      * @return the frequency of the waveform to be generated
      */
-    public float askFrequencyWaveForms() {
+    public float getFrequencyWaveForms() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What should be the frequency of the waveform?");
         float frequency = scanner.nextFloat();
@@ -97,7 +97,7 @@ public class Waveforms extends WAVAudioFile {
      *
      * @return the frequency of the waveform to be generated
      */
-    public float askAmplitudeWaveForms() {
+    public float getAmplitudeWaveForms() {
         Scanner scanner = new Scanner(System.in);
         float amplitude;
         do {
@@ -148,7 +148,6 @@ public class Waveforms extends WAVAudioFile {
                                                 bytes.length);
                 buffer.close();
             }
-            this.duration = duration;
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
@@ -158,9 +157,9 @@ public class Waveforms extends WAVAudioFile {
      * Asks the user for the parameters and generates a sine waveform
      */
     public void createSine() {
-        double duration = this.askDurationWaveForms();
-        float frequency = this.askFrequencyWaveForms();
-        float amplitude = this.askAmplitudeWaveForms();
+        double duration = this.getDurationWaveForms();
+        float frequency = this.getFrequencyWaveForms();
+        float amplitude = this.getAmplitudeWaveForms();
 
         this.generateSine(duration, frequency, amplitude);
     }
@@ -199,8 +198,6 @@ public class Waveforms extends WAVAudioFile {
 
                 buffer.close();
             }
-            this.duration = duration;
-
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
@@ -210,9 +207,9 @@ public class Waveforms extends WAVAudioFile {
      * Asks the user for the parameters and generates a square waveform
      */
     public void createSquare() {
-        double duration = this.askDurationWaveForms();
-        float frequency = this.askFrequencyWaveForms();
-        float amplitude = this.askAmplitudeWaveForms();
+        double duration = this.getDurationWaveForms();
+        float frequency = this.getFrequencyWaveForms();
+        float amplitude = this.getAmplitudeWaveForms();
 
         this.generateSquare(duration, frequency, amplitude);
 
@@ -246,8 +243,6 @@ public class Waveforms extends WAVAudioFile {
                                                 bytes.length);
                 buffer.close();
             }
-            this.duration = duration;
-
         } catch (IOException e) {
             System.out.println("IOException occurred");
         }
@@ -257,9 +252,9 @@ public class Waveforms extends WAVAudioFile {
      * Asks the user for the parameters and generates a sawtooth waveform
      */
     public void createSawTooth() {
-        double duration = this.askDurationWaveForms();
-        float frequency = this.askFrequencyWaveForms();
-        float amplitude = this.askAmplitudeWaveForms();
+        double duration = this.getDurationWaveForms();
+        float frequency = this.getFrequencyWaveForms();
+        float amplitude = this.getAmplitudeWaveForms();
 
         this.generateSquare(duration, frequency, amplitude);
 
